@@ -30,10 +30,13 @@ void Transform::UpdateTransform()
 void Transform::UpdateFromPxTransform(PxTransform pxTransform)
 {
     _pxTransform = pxTransform;
-
-    PxTransform parentInverse = parent->_pxTransform.getInverse();
-    PxTransform localTransform = parentInverse.transform(_pxTransform);
-
+    PxTransform localTransform = _pxTransform;
+    if (parent)
+    {
+        PxTransform parentInverse = parent->_pxTransform.getInverse();
+        localTransform = parentInverse.transform(_pxTransform);
+    }
+   
     _translation = Vector4(localTransform.p.x, localTransform.p.y, localTransform.p.z, 0.f);
     
     Quaternion quaternion(localTransform.q.x, localTransform.q.y, localTransform.q.z, localTransform.q.w);

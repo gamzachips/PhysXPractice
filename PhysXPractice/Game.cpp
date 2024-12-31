@@ -41,7 +41,7 @@ void Game::Update()
 	mTimeManager->Update();
 	//Update
 	mNowScene->Update(mTimeManager->GetDeltaTime());
-
+	mNowScene->LateUpdate(mTimeManager->GetDeltaTime());
 }
 
 void Game::Render()

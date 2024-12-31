@@ -157,6 +157,7 @@
     <ClInclude Include="Object.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="PhysicsManager.h" />
+    <ClInclude Include="RDObject.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="RSObject.h" />
     <ClInclude Include="Scene.h" />
@@ -192,6 +193,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="PhysicsManager.cpp" />
+    <ClCompile Include="RDObject.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="RSObject.cpp" />
     <ClCompile Include="Scene.cpp" />

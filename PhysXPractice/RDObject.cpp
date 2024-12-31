@@ -1,46 +1,44 @@
 #include "pch.h"
-#include "RSObject.h"
+#include "RDObject.h"
 #include "Collider.h"
 
-RSObject::RSObject()
+RDObject::RDObject()
 {
 	Vector3 pos = mTransform.GetWorldPosition();
-	mRigidbody = Game::GetPhysicsManager()->GetPhysics()->createRigidStatic(PxTransform(PxVec3(pos.x, pos.y, pos.z)));
+	mRigidbody = Game::GetPhysicsManager()->GetPhysics()->createRigidDynamic(PxTransform(PxVec3(pos.x, pos.y, pos.z)));
 	mRigidbody->userData = this;
+	mRigidbody->setRigidBodyFlag(PxRigidBodyFlag::eENABLE_CCD, true);
 }
 
-RSObject::~RSObject()
+RDObject::~RDObject()
 {
 	mRigidbody->release();
 }
 
-void RSObject::Init()
+void RDObject::Init()
 {
 	__super::Init();
 }
 
-void RSObject::Update(float deltaTime)
+void RDObject::Update(float deltaTime)
 {
 	__super::Update(deltaTime);
-
-	//오브젝트 -> 리지드액터 동기화 
 	mRigidbody->setGlobalPose(mTransform._pxTransform);
 }
 
-void RSObject::LateUpdate(float deltaTime)
+void RDObject::LateUpdate(float deltaTime)
 {
 	__super::LateUpdate(deltaTime);
 
-	//리지드액터 -> 오브젝트 동기화 
 	mTransform.UpdateFromPxTransform(mRigidbody->getGlobalPose());
 }
 
-void RSObject::Render(ComPtr<ID3D11DeviceContext> dc)
+void RDObject::Render(ComPtr<ID3D11DeviceContext> dc)
 {
 	__super::Render(dc);
 }
 
-void RSObject::AddCollider(Collider* collider)
+void RDObject::AddCollider(Collider* collider)
 {
 	mColliders.push_back(collider);
 	mRigidbody->attachShape(*collider->mShape);

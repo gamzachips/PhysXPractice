@@ -20,7 +20,7 @@ public:
 public:
 	virtual void Init();
 	virtual void Update(float deltaTime);
-	virtual void PostUpdate(float deltaTime);
+	virtual void LateUpdate(float deltaTime);
 	virtual void Render(ComPtr<ID3D11DeviceContext> dc);
 
 	virtual void OnTriggerEnter(Collider* other) {}

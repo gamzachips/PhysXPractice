@@ -125,6 +125,9 @@
     <ClCompile Include="Collider.cpp">
       <Filter>소스 파일\Framework\Collider</Filter>
     </ClCompile>
+    <ClCompile Include="RDObject.cpp">
+      <Filter>소스 파일\Framework\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -213,6 +216,9 @@
     </ClInclude>
     <ClInclude Include="Collider.h">
       <Filter>소스 파일\Framework\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="RDObject.h">
+      <Filter>소스 파일\Framework\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

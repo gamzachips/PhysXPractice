@@ -25,5 +25,5 @@ void PhysicsManager::Initialize()
     if (!mPhysics)
         assert(mFoundation, "PxCreatePhysics failed");
 
-    mDefaultMaterial = mPhysics->createMaterial(0.5f, 0.5f, 0.5f);
+    mDefaultMaterial = mPhysics->createMaterial(0.5f, 0.5f, 0.f);
 }

@@ -1,12 +1,10 @@
 #pragma once
 #include "Object.h"
-
-//Rigid Static Object
-class RSObject : public Object
+class RDObject :  public Object
 {
 public:
-	RSObject();
-	virtual ~RSObject();
+	RDObject();
+	virtual ~RDObject();
 
 public:
 	virtual void Init();
@@ -23,10 +21,10 @@ public:
 	virtual void OnCollisionExit(Collider* other) {}
 
 	void AddCollider(Collider* collider);
-	PxRigidStatic* GetRigidbody() { return mRigidbody; }
+	PxRigidDynamic* GetRigidbody() { return mRigidbody; }
 
 private:
-	PxRigidStatic* mRigidbody;
+	PxRigidDynamic* mRigidbody;
 	std::vector<Collider*> mColliders;
 
 };

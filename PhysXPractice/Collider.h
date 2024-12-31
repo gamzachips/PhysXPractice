@@ -24,6 +24,7 @@ protected:
 	PxShape* mShape = nullptr;
 
 	friend class RSObject;
+	friend class RDObject;
 };
 
 

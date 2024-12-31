@@ -9,6 +9,7 @@ Scene::Scene()
 
 	PxSceneDesc sceneDesc(Game::GetPhysicsManager()->GetPhysics()->getTolerancesScale());
 	sceneDesc.gravity = PxVec3(0.f, -9.8f, 0.f);
+	//sceneDesc.bounceThresholdVelocity = 0.5f;
 	sceneDesc.cpuDispatcher = PxDefaultCpuDispatcherCreate(1);
 	sceneDesc.filterShader = PxDefaultSimulationFilterShader;
 
@@ -22,15 +23,6 @@ Scene::~Scene()
 void Scene::Init(ComPtr<ID3D11Device> device)
 {
 
-	{
-		PxPhysics* physics = Game::GetPhysicsManager()->GetPhysics();
-		PxSceneDesc sceneDesc(physics->getTolerancesScale());
-
-		sceneDesc.gravity = physx::PxVec3(0.0f, -9.81f, 0.0f);
-		sceneDesc.cpuDispatcher = physx::PxDefaultCpuDispatcherCreate(2);
-		sceneDesc.filterShader = physx::PxDefaultSimulationFilterShader;
-		mPxScene = physics->createScene(sceneDesc);
-	}
 
 	for (Object* object :mObjects)
 	{
@@ -51,8 +43,16 @@ void Scene::Update(float deltaTime)
 
 	if (mPxScene)
 	{
-		mPxScene->simulate(deltaTime);
+		mPxScene->simulate(1.0f/120.f);
 		mPxScene->fetchResults(true);
+	}
+}
+
+void Scene::LateUpdate(float deltaTime)
+{
+	for (Object* object : mObjects)
+	{
+		object->LateUpdate(deltaTime);
 	}
 }
 
