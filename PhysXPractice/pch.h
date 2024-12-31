@@ -69,6 +69,7 @@ using Quaternion = DirectX::SimpleMath::Quaternion;
 
 #include "Struct.h"
 #include "Game.h"
+#include "GameApp.h"
 #include "D3DRenderer.h"
 #include "TimeManager.h"
 #include "InputManager.h"

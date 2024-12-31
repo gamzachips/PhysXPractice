@@ -27,6 +27,15 @@
     <Filter Include="소스 파일\Framework\Assimp">
       <UniqueIdentifier>{67477e20-22f0-47d3-a982-103bfb584440}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Framework\Component">
+      <UniqueIdentifier>{456b6a14-b701-422e-898f-608d1ac98a16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Framework\Object">
+      <UniqueIdentifier>{7ec71f56-38e0-42fe-be74-7dbf96c7a5fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Framework\Collider">
+      <UniqueIdentifier>{a135be34-ecad-4837-989e-a384da737399}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -42,12 +51,6 @@
       <Filter>소스 파일\Framework</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
-      <Filter>소스 파일\Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="Component.cpp">
-      <Filter>소스 파일\Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="Object.cpp">
       <Filter>소스 파일\Framework</Filter>
     </ClCompile>
     <ClCompile Include="Transform.cpp">
@@ -98,14 +101,29 @@
     <ClCompile Include="Texture.cpp">
       <Filter>소스 파일\Framework\Assimp</Filter>
     </ClCompile>
-    <ClCompile Include="MeshRenderer.cpp">
-      <Filter>소스 파일\Framework</Filter>
-    </ClCompile>
     <ClCompile Include="ResourceManager.cpp">
       <Filter>소스 파일\Engine</Filter>
     </ClCompile>
     <ClCompile Include="PhysicsManager.cpp">
       <Filter>소스 파일\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>소스 파일\Framework\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshRenderer.cpp">
+      <Filter>소스 파일\Framework\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>소스 파일\Framework\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="RSObject.cpp">
+      <Filter>소스 파일\Framework\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxCollider.cpp">
+      <Filter>소스 파일\Framework\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>소스 파일\Framework\Collider</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -122,12 +140,6 @@
       <Filter>소스 파일\Framework</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
-      <Filter>소스 파일\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="Component.h">
-      <Filter>소스 파일\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="Object.h">
       <Filter>소스 파일\Framework</Filter>
     </ClInclude>
     <ClInclude Include="Transform.h">
@@ -178,14 +190,29 @@
     <ClInclude Include="Texture.h">
       <Filter>소스 파일\Framework\Assimp</Filter>
     </ClInclude>
-    <ClInclude Include="MeshRenderer.h">
-      <Filter>소스 파일\Framework</Filter>
-    </ClInclude>
     <ClInclude Include="ResourceManager.h">
       <Filter>소스 파일\Engine</Filter>
     </ClInclude>
     <ClInclude Include="PhysicsManager.h">
       <Filter>소스 파일\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>소스 파일\Framework\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshRenderer.h">
+      <Filter>소스 파일\Framework\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>소스 파일\Framework\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="RSObject.h">
+      <Filter>소스 파일\Framework\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxCollider.h">
+      <Filter>소스 파일\Framework\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>소스 파일\Framework\Collider</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -7,6 +7,21 @@ Scene::Scene()
 {
 	mCamera = new Camera;
 
+	PxSceneDesc sceneDesc(Game::GetPhysicsManager()->GetPhysics()->getTolerancesScale());
+	sceneDesc.gravity = PxVec3(0.f, -9.8f, 0.f);
+	sceneDesc.cpuDispatcher = PxDefaultCpuDispatcherCreate(1);
+	sceneDesc.filterShader = PxDefaultSimulationFilterShader;
+
+	mPxScene = Game::GetPhysicsManager()->GetPhysics()->createScene(sceneDesc);
+}
+
+Scene::~Scene()
+{
+}
+
+void Scene::Init(ComPtr<ID3D11Device> device)
+{
+
 	{
 		PxPhysics* physics = Game::GetPhysicsManager()->GetPhysics();
 		PxSceneDesc sceneDesc(physics->getTolerancesScale());
@@ -16,14 +31,7 @@ Scene::Scene()
 		sceneDesc.filterShader = physx::PxDefaultSimulationFilterShader;
 		mPxScene = physics->createScene(sceneDesc);
 	}
-}
 
-Scene::~Scene()
-{
-}
-
-void Scene::Init(ComPtr<ID3D11Device> device)
-{
 	for (Object* object :mObjects)
 	{
 		object->Init();

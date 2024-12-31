@@ -1,12 +1,13 @@
 #pragma once
 
 #include "D3DRenderer.h"
+#include "Scene.h"
 
 class InputManager;
 class TimeManager;
 class ResourceManager;
 class PhysicsManager;
-class Scene;
+
 
 class Game
 {
@@ -32,6 +33,7 @@ public:
 		if (mNowScene)
 			delete mNowScene;
 		mNowScene = new T;
+		mNowScene->Init(mRenderer.GetDevice());
 	}
 
 private:

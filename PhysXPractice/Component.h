@@ -7,14 +7,14 @@ class Component
 public:
 	Component() {}
 	virtual ~Component() {}
-	virtual void Init() = 0;
-	virtual void Update(float deltaTime) = 0;
-	virtual void Render(ComPtr<ID3D11DeviceContext> dc) = 0;
+	virtual void Init() abstract;
+	virtual void Update(float deltaTime) abstract;
+	virtual void Render(ComPtr<ID3D11DeviceContext> dc) abstract;
 
 	void SetOwner(Object* owner) { mOwner = owner; }
 	Object* GetOwner() { return mOwner; }
 
-private:
+protected:
 	Object* mOwner = nullptr;
 };
 

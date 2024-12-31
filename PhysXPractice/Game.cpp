@@ -32,9 +32,7 @@ void Game::Init()
 	mInputManager->Init();
 	mTimeManager->Init();
 	mResourceManager->Init();
-
-	//Init
-	mNowScene->Init(mRenderer.GetDevice());
+	mPhysicsManager->Initialize();
 }
 
 void Game::Update()

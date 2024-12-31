@@ -37,6 +37,11 @@ void Object::Update(float deltaTime)
 	}
 }
 
+void Object::PostUpdate(float deltaTime)
+{
+
+}
+
 void Object::Render(ComPtr<ID3D11DeviceContext> dc)
 {
 	if (mIsActive == false) return;

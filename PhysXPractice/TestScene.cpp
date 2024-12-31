@@ -1,7 +1,8 @@
 #include "pch.h"
 #include "TestScene.h"
-#include "Object.h"
+#include "RSObject.h"
 #include "MeshRenderer.h"
+#include "BoxCollider.h"
 
 TestScene::TestScene()
 {
@@ -20,24 +21,30 @@ void TestScene::Init(ComPtr<ID3D11Device> device)
 		std::string filePath = "../Resources/Sphere.fbx";
 		Game::GetResourceManager()->LoadFbx(filePath);
 
-		mObj = new Object;
+		mObj = new RSObject;
 		AddObject(mObj);
 
 		MeshRenderer* mr = mObj->CreateComponent<MeshRenderer>(device);
 		std::shared_ptr<Model> model = Game::GetResourceManager()->GetOrCreateModel(device);
 		mr->SetModel(model);
+
+		mObj->AddCollider(new BoxCollider(Vector3(1.f, 1.f, 1.f)));
+
 	}
 	{
 		std::string filePath = "../Resources/Ground.fbx";
 		Game::GetResourceManager()->LoadFbx(filePath);
 
-		mGround = new Object;
+		mGround = new RSObject;
 		AddObject(mGround);
 
 		MeshRenderer* mr = mGround->CreateComponent<MeshRenderer>(device);
 		std::shared_ptr<Model> model = Game::GetResourceManager()->GetOrCreateModel(device);
 		mr->SetModel(model);
 		mGround->GetTransform().SetPosition(Vector4(0, -100, 0, 0));
+
+		mGround->AddCollider(new BoxCollider(Vector3(100.f, 1.f, 100.f)));
+
 	}
 	
 	__super::Init(device);

@@ -10,7 +10,7 @@ public:
 	virtual void Render(ComPtr<ID3D11DeviceContext> dc);
 
 private:
-	class Object* mObj;
-	class Object* mGround;
+	class RSObject* mObj;
+	class RSObject* mGround;
 };
 

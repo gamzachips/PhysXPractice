@@ -27,7 +27,6 @@ GameApp::GameApp(HINSTANCE hInstance)
 	m_wcex.lpszClassName = m_szWindowClass;
 
 	mGame = new Game;
-	mGame->ChangeScene<TestScene>();
 }
 
 GameApp::~GameApp()
@@ -65,12 +64,15 @@ bool GameApp::Initialize()
 
 	m_currentTime = m_previousTime = (float)GetTickCount64() / 1000.0f;
 
+	
+
 	return true;
 }
 
 bool GameApp::Run()
 {
 	mGame->Init();
+	mGame->ChangeScene<TestScene>();
 
 	// PeekMessage 메세지가 있으면 true,없으면 false
 	while (TRUE)

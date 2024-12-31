@@ -1,7 +1,8 @@
 #pragma once
 
+#include "RSObject.h"
+
 class Camera;
-class Object;
 class DirectionalLight;
 
 class Scene
@@ -14,8 +15,9 @@ public:
 	virtual void Render(ComPtr<ID3D11DeviceContext> dc);
 
 	Camera* GetCamera() { return mCamera; }
-	void AddObject(Object* object) { mObjects.push_back(object); }
 
+	void AddObject(Object* object) { mObjects.push_back(object); }
+	void AddObject(RSObject* object) { mObjects.push_back(object); mPxScene->addActor(*object->GetRigidbody()); }
 protected:
 
 	void MoveCamera();

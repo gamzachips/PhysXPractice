@@ -16,5 +16,29 @@ void Transform::UpdateTransform()
     if (parent)
         _transform = _transform * parent->_transform;
 
+   
+    //Update PxTransform 
+
+    PxVec3 position(_translation.x, _translation.y, _translation.z);
+
+    Quaternion rotQut = Quaternion::CreateFromYawPitchRoll(_rotation.y, _rotation.x, _rotation.z);
+    PxQuat pxRot = PxQuat(rotQut.x, rotQut.y, rotQut.z, rotQut.w);
+
+    _pxTransform = PxTransform(position, pxRot);
+}
+
+void Transform::UpdateFromPxTransform(PxTransform pxTransform)
+{
+    _pxTransform = pxTransform;
+
+    PxTransform parentInverse = parent->_pxTransform.getInverse();
+    PxTransform localTransform = parentInverse.transform(_pxTransform);
+
+    _translation = Vector4(localTransform.p.x, localTransform.p.y, localTransform.p.z, 0.f);
+    
+    Quaternion quaternion(localTransform.q.x, localTransform.q.y, localTransform.q.z, localTransform.q.w);
+    Vector3 rotation = quaternion.ToEuler();
+
+    _rotation = Vector4(rotation.x, rotation.y, rotation.z, 0.f);
 }
 
