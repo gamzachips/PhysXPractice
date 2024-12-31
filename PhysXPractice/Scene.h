@@ -29,5 +29,6 @@ protected:
 	Camera* mCamera;
 	std::vector<Object*> mObjects;
 	PxScene* mPxScene;
+	class PhysicsEvent* mEventCallback;
 };
 

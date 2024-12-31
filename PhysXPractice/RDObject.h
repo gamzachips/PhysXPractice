@@ -12,13 +12,13 @@ public:
 	virtual void LateUpdate(float deltaTime);
 	virtual void Render(ComPtr<ID3D11DeviceContext> dc);
 
-	virtual void OnTriggerEnter(Collider* other) {}
-	virtual void OnTriggerStay(Collider* other) {}
-	virtual void OnTriggerExit(Collider* other) {}
+	virtual void OnTriggerEnter(Object* other) { SetIsActive(false); }
+	virtual void OnTriggerStay(Object* other) {}
+	virtual void OnTriggerExit(Object* other) {}
 
-	virtual void OnCollisionEnter(Collider* other) {}
-	virtual void OnCollisionStay(Collider* other) {}
-	virtual void OnCollisionExit(Collider* other) {}
+	virtual void OnCollisionEnter(Object* other) {}
+	virtual void OnCollisionStay(Object* other) {}
+	virtual void OnCollisionExit(Object* other) {}
 
 	void AddCollider(Collider* collider);
 	PxRigidDynamic* GetRigidbody() { return mRigidbody; }

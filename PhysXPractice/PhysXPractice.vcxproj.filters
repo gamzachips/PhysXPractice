@@ -128,6 +128,9 @@
     <ClCompile Include="RDObject.cpp">
       <Filter>소스 파일\Framework\Object</Filter>
     </ClCompile>
+    <ClCompile Include="PhysicsEvent.cpp">
+      <Filter>소스 파일\Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -219,6 +222,9 @@
     </ClInclude>
     <ClInclude Include="RDObject.h">
       <Filter>소스 파일\Framework\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEvent.h">
+      <Filter>소스 파일\Engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
