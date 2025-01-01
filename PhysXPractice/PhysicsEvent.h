@@ -1,4 +1,6 @@
 #pragma once
+#include "Object.h"
+
 class PhysicsEvent : public PxSimulationEventCallback
 {
 	//This is called when a breakable constraint breaks.

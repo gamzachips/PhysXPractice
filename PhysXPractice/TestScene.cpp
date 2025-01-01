@@ -1,9 +1,9 @@
 #include "pch.h"
 #include "TestScene.h"
-#include "RSObject.h"
-#include "RDObject.h"
+#include "Object.h"
 #include "MeshRenderer.h"
 #include "BoxCollider.h"
+#include "Rigidbody.h"
 
 TestScene::TestScene()
 {
@@ -22,15 +22,16 @@ void TestScene::Init(ComPtr<ID3D11Device> device)
 		std::string filePath = "../Resources/gun.fbx";
 		Game::GetResourceManager()->LoadFbx(filePath);
 
-		mObj = new RDObject;
+		mObj = new Object;
 		
 
 		MeshRenderer* mr = mObj->CreateComponent<MeshRenderer>(device);
 		std::shared_ptr<Model> model = Game::GetResourceManager()->GetOrCreateModel(device);
 		mr->SetModel(model);
 
-		mObj->AddCollider(new BoxCollider(Vector3(10.f, 10.f, 80.f)));
-		mObj->GetRigidbody()->setMass(0.1);
+		mObj->CreateComponent<Rigidbody>(true);
+		mObj->CreateComponent<BoxCollider>(Vector3(10.f, 10.f, 80.f));
+		//mObj->GetRigidbody()->setMass(0.1);
 		mObj->GetTransform().SetPosition(Vector4(0, 150, 0, 0));
 		mObj->GetTransform().Rotate(Vector4(20, 20, 0, 0));
 		AddObject(mObj);
@@ -39,14 +40,15 @@ void TestScene::Init(ComPtr<ID3D11Device> device)
 		std::string filePath = "../Resources/Ground.fbx";
 		Game::GetResourceManager()->LoadFbx(filePath);
 
-		mGround = new RSObject;
+		mGround = new Object;
 		
 
 		MeshRenderer* mr = mGround->CreateComponent<MeshRenderer>(device);
 		std::shared_ptr<Model> model = Game::GetResourceManager()->GetOrCreateModel(device);
 		mr->SetModel(model);
 		mGround->GetTransform().SetPosition(Vector4(0, 0, 0, 0));
-		mGround->AddCollider(new BoxCollider(Vector3(1000.f, 20.f, 1000.f)));
+		mObj->CreateComponent<Rigidbody>();
+		mObj->CreateComponent<BoxCollider>(Vector3(1000.f, 20.f, 1000.f));
 		AddObject(mGround);
 	}
 	

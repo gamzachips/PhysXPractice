@@ -17,6 +17,10 @@ void BoxCollider::Update(float deltaTime)
 {
 }
 
+void BoxCollider::LateUpdate(float deltaTime)
+{
+}
+
 void BoxCollider::Render(ComPtr<ID3D11DeviceContext> dc)
 {
 }

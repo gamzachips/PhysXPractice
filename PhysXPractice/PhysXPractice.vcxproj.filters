@@ -116,20 +116,17 @@
     <ClCompile Include="Object.cpp">
       <Filter>소스 파일\Framework\Object</Filter>
     </ClCompile>
-    <ClCompile Include="RSObject.cpp">
-      <Filter>소스 파일\Framework\Object</Filter>
-    </ClCompile>
     <ClCompile Include="BoxCollider.cpp">
       <Filter>소스 파일\Framework\Collider</Filter>
     </ClCompile>
     <ClCompile Include="Collider.cpp">
       <Filter>소스 파일\Framework\Collider</Filter>
     </ClCompile>
-    <ClCompile Include="RDObject.cpp">
-      <Filter>소스 파일\Framework\Object</Filter>
-    </ClCompile>
     <ClCompile Include="PhysicsEvent.cpp">
       <Filter>소스 파일\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Rigidbody.cpp">
+      <Filter>소스 파일\Framework\Collider</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -211,20 +208,17 @@
     <ClInclude Include="Object.h">
       <Filter>소스 파일\Framework\Object</Filter>
     </ClInclude>
-    <ClInclude Include="RSObject.h">
-      <Filter>소스 파일\Framework\Object</Filter>
-    </ClInclude>
     <ClInclude Include="BoxCollider.h">
       <Filter>소스 파일\Framework\Collider</Filter>
     </ClInclude>
     <ClInclude Include="Collider.h">
       <Filter>소스 파일\Framework\Collider</Filter>
     </ClInclude>
-    <ClInclude Include="RDObject.h">
-      <Filter>소스 파일\Framework\Object</Filter>
-    </ClInclude>
     <ClInclude Include="PhysicsEvent.h">
       <Filter>소스 파일\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Rigidbody.h">
+      <Filter>소스 파일\Framework\Collider</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

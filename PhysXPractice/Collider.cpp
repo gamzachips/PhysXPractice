@@ -1,11 +1,13 @@
 #include "pch.h"
 #include "Collider.h"
 #include "Object.h"
+#include "Rigidbody.h"
 
 
 Collider::Collider()
 {
-
+	Rigidbody* rigidbody = mOwner->GetComponent<Rigidbody>();
+	rigidbody->GetRigidbody()->attachShape(*mShape);
 }
 
 void Collider::SetLocalPosition(Vector3 pos)

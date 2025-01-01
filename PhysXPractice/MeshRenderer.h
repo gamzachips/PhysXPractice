@@ -15,6 +15,7 @@ public:
 	virtual ~MeshRenderer();
 	virtual void Init();
 	virtual void Update(float deltaTime);
+	virtual void LateUpdate(float deltaTime);
 	virtual void Render(ComPtr<ID3D11DeviceContext> dc);
 
 	void RenderNode(ComPtr<ID3D11DeviceContext> dc, Node* node);

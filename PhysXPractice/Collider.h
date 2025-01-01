@@ -1,14 +1,16 @@
 #pragma once
+#include "Component.h"
 
-
-class Collider
+class Collider : public Component
 {
 public:
+	//반드시 Rigidbody가 있을 때 생성해야 합니다.
 	Collider();
 	virtual ~Collider() {}
 public:
 	virtual void Init() abstract;
 	virtual void Update(float deltaTime) abstract;
+	virtual void LateUpdate(float deltaTime) abstract;
 	virtual void Render(ComPtr<ID3D11DeviceContext> dc) abstract;
 
 	void SetLocalPosition(Vector3 pos);
@@ -23,8 +25,7 @@ private:
 protected:
 	PxShape* mShape = nullptr;
 
-	friend class RSObject;
-	friend class RDObject;
+	friend class Rigidbody;
 };
 
 

@@ -24,8 +24,6 @@ Scene::Scene()
 	mCamera = new Camera;
 	mEventCallback = new PhysicsEvent;
 
-
-
 	PxSceneDesc sceneDesc(Game::GetPhysicsManager()->GetPhysics()->getTolerancesScale());
 	sceneDesc.gravity = PxVec3(0.f, -9.8f, 0.f);
 	//sceneDesc.bounceThresholdVelocity = 0.5f;

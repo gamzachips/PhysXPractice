@@ -1,8 +1,6 @@
 #pragma once
 
-#include "RSObject.h"
-#include "RDObject.h"
-
+class Object;
 class Camera;
 class DirectionalLight;
 
@@ -18,9 +16,7 @@ public:
 
 	Camera* GetCamera() { return mCamera; }
 
-	void AddObject(Object* object) { mObjects.push_back(object); }
-	void AddObject(RSObject* object) { mObjects.push_back(object); mPxScene->addActor(*object->GetRigidbody()); }
-	void AddObject(RDObject* object) { mObjects.push_back(object); mPxScene->addActor(*object->GetRigidbody()); }
+	void AddObject(Object* object) { mObjects.push_back(object); }\
 protected:
 
 	void MoveCamera();

@@ -52,6 +52,10 @@ void MeshRenderer::Update(float deltaTime)
 {
 }
 
+void MeshRenderer::LateUpdate(float deltaTime)
+{
+}
+
 void MeshRenderer::Render(ComPtr<ID3D11DeviceContext> dc)
 {
 	if (_model == nullptr)

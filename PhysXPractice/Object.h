@@ -58,9 +58,10 @@ public:
 		}
 	}
 
+	Transform mTransform{};
 protected:
 	std::vector<Component*> mComponents;
-	Transform mTransform{};
+	
 	bool mIsActive = true;
 
 };
