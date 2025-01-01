@@ -18,6 +18,11 @@ struct VertexData
 	Vector3 tangent{};
 };
 
+struct BasicVertexData
+{
+	Vector3 position = { 0, 0, 0 };
+};
+
 struct WVPData
 {
 	Matrix world;

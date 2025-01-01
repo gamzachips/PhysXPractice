@@ -30,7 +30,12 @@ Scene::Scene()
 	sceneDesc.cpuDispatcher = PxDefaultCpuDispatcherCreate(1);
 	sceneDesc.filterShader = CustomFilterShader;
 	sceneDesc.simulationEventCallback = mEventCallback;
+	// GPU 가속 설정 (필수)
+	sceneDesc.flags |= PxSceneFlag::eENABLE_GPU_DYNAMICS; // GPU dynamics 활성화
+	sceneDesc.broadPhaseType = PxBroadPhaseType::eGPU;    // GPU BroadPhase 설정
+	sceneDesc.cudaContextManager = Game::GetPhysicsManager()->GetCudaManager(); // GPU 가속을 위한 CUDA Context Manager 설정
 	mPxScene = Game::GetPhysicsManager()->GetPhysics()->createScene(sceneDesc);
+
 }
 
 Scene::~Scene()
@@ -55,14 +60,15 @@ void Scene::Update(float deltaTime)
 		object->Update(deltaTime);
 	}
 	
-	//MoveCamera();
-	//RotateCamera();
+	MoveCamera();
+	RotateCamera();
 	mCamera->Update(deltaTime);
 
 	if (mPxScene)
 	{
 		mPxScene->simulate(deltaTime);
 		mPxScene->fetchResults(true);
+		mPxScene->fetchResultsParticleSystem();
 	}
 }
 

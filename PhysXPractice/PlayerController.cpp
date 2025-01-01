@@ -32,31 +32,31 @@ void PlayerController::Init()
 
 void PlayerController::Update(float deltaTime)
 {
-	if (Game::GetInputManager()->GetButtonPressed(KeyType::W))
-	{
-		mMoveDirection += PxVec3(0, 0, 1);
-	}
-	else if (Game::GetInputManager()->GetButtonPressed(KeyType::A))
-	{
-		mMoveDirection += PxVec3(-1, 0, 0);
-	}
-	else if (Game::GetInputManager()->GetButtonPressed(KeyType::S))
-	{
-		mMoveDirection += PxVec3(0, 0, -1);
-	}
-	else if (Game::GetInputManager()->GetButtonPressed(KeyType::D))
-	{
-		mMoveDirection += PxVec3(1, 0, 0);
-	}
-	if (Game::GetInputManager()->GetButtonDown(KeyType::LeftMouse))
-	{
-		mMoveDirection.y = mJumpSpeed;
-	}
-
-	mMoveDirection *= mSpeed;
-	mMoveDirection.y -= mGravity * deltaTime;
-
-	mCapsuleController->move(mMoveDirection, 0.001, deltaTime, mCharacterControllerFilters);
+	//if (Game::GetInputManager()->GetButtonPressed(KeyType::W))
+	//{
+	//	mMoveDirection += PxVec3(0, 0, 1);
+	//}
+	//else if (Game::GetInputManager()->GetButtonPressed(KeyType::A))
+	//{
+	//	mMoveDirection += PxVec3(-1, 0, 0);
+	//}
+	//else if (Game::GetInputManager()->GetButtonPressed(KeyType::S))
+	//{
+	//	mMoveDirection += PxVec3(0, 0, -1);
+	//}
+	//else if (Game::GetInputManager()->GetButtonPressed(KeyType::D))
+	//{
+	//	mMoveDirection += PxVec3(1, 0, 0);
+	//}
+	//if (Game::GetInputManager()->GetButtonDown(KeyType::LeftMouse))
+	//{
+	//	mMoveDirection.y = mJumpSpeed;
+	//}
+	//
+	//mMoveDirection *= mSpeed;
+	//mMoveDirection.y -= mGravity * deltaTime;
+	//
+	//mCapsuleController->move(mMoveDirection, 0.001, deltaTime, mCharacterControllerFilters);
 }
 
 void PlayerController::LateUpdate(float deltaTime)

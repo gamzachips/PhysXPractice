@@ -13,5 +13,6 @@ public:
 private:
 	class Object* mObj;
 	class Object* mGround;
+	class Object* mParticle;
 };
 

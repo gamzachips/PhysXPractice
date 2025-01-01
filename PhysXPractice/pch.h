@@ -57,7 +57,8 @@ using namespace Microsoft::WRL;
 
 //Physics
 #include <physx/PxPhysicsAPI.h>
-#include <physx/PxPhysics.h>
+#include "physx/cudamanager/PxCudaContextManager.h"
+#include "physx/cudamanager./PxCudaContext.h"
 using namespace physx;
 
 using Vector2 = DirectX::SimpleMath::Vector2;

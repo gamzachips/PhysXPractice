@@ -5,6 +5,8 @@
 #include "BoxCollider.h"
 #include "Rigidbody.h"
 #include "PlayerController.h"
+#include "ParticleSystem.h"
+#include "ParticleRenderer.h"
 
 TestScene::TestScene()
 {
@@ -61,7 +63,13 @@ void TestScene::Init(ComPtr<ID3D11Device> device)
 		mGround->CreateComponent<BoxCollider>(Vector3(1000.f, 30.f, 1000.f));
 		AddObject(mGround);
 	}
-	
+	{
+		mParticle = new Object;
+		mParticle->CreateComponent<ParticleSystem>(this);
+		mParticle->CreateComponent<ParticleRenderer>(device);
+		mObj->GetTransform().SetPosition(Vector4(0, 40, 0, 0)); 
+		AddObject(mParticle);
+	}
 	__super::Init(device);
 }
 

@@ -33,6 +33,26 @@ public:
 		assert(SUCCEEDED(hr));
 	}
 
+	void Create(const PxVec4* vertices, size_t count, ComPtr<ID3D11Device> device)
+	{
+		_stride = sizeof(PxVec4);
+		_count = count;
+
+		D3D11_BUFFER_DESC desc;
+		ZeroMemory(&desc, sizeof(desc));
+		desc.Usage = D3D11_USAGE_DYNAMIC;
+		desc.BindFlags = D3D11_BIND_VERTEX_BUFFER; //vertex buffer 용도
+		desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+		desc.ByteWidth = _stride * _count;
+
+		D3D11_SUBRESOURCE_DATA data;
+		ZeroMemory(&data, sizeof(data));
+		data.pSysMem = vertices; //첫번째 데이터의 주소
+
+		HRESULT hr = device->CreateBuffer(&desc, &data, _vertexBuffer.GetAddressOf());
+		assert(SUCCEEDED(hr));
+	}
+
 private:
 	ComPtr<ID3D11Buffer> _vertexBuffer;
 

@@ -131,6 +131,12 @@
     <ClCompile Include="PlayerController.cpp">
       <Filter>소스 파일\Framework\Component</Filter>
     </ClCompile>
+    <ClCompile Include="ParticleSystem.cpp">
+      <Filter>소스 파일\Framework\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleRenderer.cpp">
+      <Filter>소스 파일\Framework\Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -226,6 +232,12 @@
     <ClInclude Include="PlayerController.h">
       <Filter>소스 파일\Framework\Component</Filter>
     </ClInclude>
+    <ClInclude Include="ParticleSystem.h">
+      <Filter>소스 파일\Framework\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleRenderer.h">
+      <Filter>소스 파일\Framework\Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Header.hlsli">
@@ -237,6 +249,12 @@
       <Filter>소스 파일\__test</Filter>
     </FxCompile>
     <FxCompile Include="PS.hlsl">
+      <Filter>소스 파일\__test</Filter>
+    </FxCompile>
+    <FxCompile Include="SimpleVS.hlsl">
+      <Filter>소스 파일\__test</Filter>
+    </FxCompile>
+    <FxCompile Include="SimplePS.hlsl">
       <Filter>소스 파일\__test</Filter>
     </FxCompile>
   </ItemGroup>
