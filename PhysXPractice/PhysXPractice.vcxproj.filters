@@ -208,9 +208,6 @@
     <ClInclude Include="Object.h">
       <Filter>소스 파일\Framework\Object</Filter>
     </ClInclude>
-    <ClInclude Include="BoxCollider.h">
-      <Filter>소스 파일\Framework\Collider</Filter>
-    </ClInclude>
     <ClInclude Include="Collider.h">
       <Filter>소스 파일\Framework\Collider</Filter>
     </ClInclude>
@@ -218,6 +215,9 @@
       <Filter>소스 파일\Engine</Filter>
     </ClInclude>
     <ClInclude Include="Rigidbody.h">
+      <Filter>소스 파일\Framework\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxCollider.h">
       <Filter>소스 파일\Framework\Collider</Filter>
     </ClInclude>
   </ItemGroup>

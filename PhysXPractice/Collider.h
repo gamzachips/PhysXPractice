@@ -5,10 +5,10 @@ class Collider : public Component
 {
 public:
 	//반드시 Rigidbody가 있을 때 생성해야 합니다.
-	Collider();
+	Collider(Object* owner);
 	virtual ~Collider() {}
 public:
-	virtual void Init() abstract;
+	virtual void Init();
 	virtual void Update(float deltaTime) abstract;
 	virtual void LateUpdate(float deltaTime) abstract;
 	virtual void Render(ComPtr<ID3D11DeviceContext> dc) abstract;

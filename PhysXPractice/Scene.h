@@ -16,7 +16,8 @@ public:
 
 	Camera* GetCamera() { return mCamera; }
 
-	void AddObject(Object* object) { mObjects.push_back(object); }\
+	void AddObject(Object* object) { mObjects.push_back(object); }
+	void AddPxActor(PxActor* actor) { mPxScene->addActor(*actor); }
 protected:
 
 	void MoveCamera();

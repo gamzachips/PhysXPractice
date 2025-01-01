@@ -15,7 +15,8 @@
 #include "Node.h"
 #include "Scene.h"
 
-MeshRenderer::MeshRenderer(ComPtr<ID3D11Device> device)
+MeshRenderer::MeshRenderer(Object* owner, ComPtr<ID3D11Device> device)
+	:Component(owner)
 {
 	_device = device;
 }

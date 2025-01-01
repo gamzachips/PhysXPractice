@@ -11,7 +11,7 @@ class Mesh;
 class MeshRenderer : public Component
 {
 public:
-	MeshRenderer(ComPtr<ID3D11Device> device);
+	MeshRenderer(Object* owner, ComPtr<ID3D11Device> device);
 	virtual ~MeshRenderer();
 	virtual void Init();
 	virtual void Update(float deltaTime);

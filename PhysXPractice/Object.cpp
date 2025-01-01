@@ -39,7 +39,12 @@ void Object::Update(float deltaTime)
 
 void Object::LateUpdate(float deltaTime)
 {
+	if (mIsActive == false) return;
 
+	for (Component* component : mComponents)
+	{
+		component->LateUpdate(deltaTime);
+	}
 }
 
 void Object::Render(ComPtr<ID3D11DeviceContext> dc)

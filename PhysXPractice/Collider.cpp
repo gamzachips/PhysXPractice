@@ -4,10 +4,16 @@
 #include "Rigidbody.h"
 
 
-Collider::Collider()
+Collider::Collider(Object* owner) : Component(owner)
+{
+
+}
+
+void Collider::Init()
 {
 	Rigidbody* rigidbody = mOwner->GetComponent<Rigidbody>();
-	rigidbody->GetRigidbody()->attachShape(*mShape);
+	if (rigidbody)
+		rigidbody->mRigidbody->attachShape(*mShape);
 }
 
 void Collider::SetLocalPosition(Vector3 pos)

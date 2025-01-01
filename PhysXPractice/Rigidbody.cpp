@@ -3,8 +3,10 @@
 #include "Object.h"
 #include "Collider.h"
 
-Rigidbody::Rigidbody(bool isDynamic)
+Rigidbody::Rigidbody(Object* owner, Scene* scene, bool isDynamic) : Component(owner)
 {
+	mIsDynamic = isDynamic;
+
 	if (isDynamic == false)
 	{
 		mRigidbody = Game::GetPhysicsManager()->GetPhysics()->createRigidStatic(PxTransform(PxVec3(0.f, 0.f, 0.f)));
@@ -13,7 +15,9 @@ Rigidbody::Rigidbody(bool isDynamic)
 	{
 		mRigidbody = Game::GetPhysicsManager()->GetPhysics()->createRigidDynamic(PxTransform(PxVec3(0.f, 0.f, 0.f)));
 	}
-	mRigidbody->userData = mOwner;
+	mRigidbody->userData = owner;
+
+	scene->AddPxActor(mRigidbody);
 }
 
 Rigidbody::~Rigidbody()
@@ -40,4 +44,12 @@ void Rigidbody::LateUpdate(float deltaTime)
 
 void Rigidbody::Render(ComPtr<ID3D11DeviceContext> dc)
 {
+}
+
+void Rigidbody::SetMass(float mass)
+{
+	if (!mIsDynamic) return;
+
+	PxRigidDynamic* rigid = static_cast<PxRigidDynamic*>(mRigidbody);
+	rigid->setMass(mass);
 }

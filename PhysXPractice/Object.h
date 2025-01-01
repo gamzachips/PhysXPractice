@@ -41,9 +41,8 @@ public:
 	template<IsComponent T, typename ...Types>
 	T* CreateComponent(Types ... Args)
 	{
-		T* component = new T(Args...);
+		T* component = new T(this, Args...);
 		mComponents.push_back(component);
-		component->SetOwner(this);
 		return component;
 	}
 

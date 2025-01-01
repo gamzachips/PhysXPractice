@@ -3,7 +3,7 @@
 class BoxCollider : public Collider
 {
 public:
-	BoxCollider(Vector3 size);
+	BoxCollider(Object* owner, Vector3 size);
 	virtual ~BoxCollider() {}
 public:
 	virtual void Init() override;
