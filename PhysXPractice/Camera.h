@@ -23,7 +23,7 @@ public:
     void SetRotateSpeed(float speed) { _rotateSpeed = speed; }
 
 private:
-    SimpleMath::Vector3 _position = { 0.0f, 100.0f, -500.0f };
+    SimpleMath::Vector3 _position = { 0.0f, 50.0f, -100.0f };
     SimpleMath::Vector3 _rotation = { 0.0f, 0.0f, 0.0f };
     SimpleMath::Matrix _worldTransform;
     SimpleMath::Vector3 _inputVector;

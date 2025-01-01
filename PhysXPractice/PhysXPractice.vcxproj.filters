@@ -128,6 +128,9 @@
     <ClCompile Include="Rigidbody.cpp">
       <Filter>소스 파일\Framework\Collider</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerController.cpp">
+      <Filter>소스 파일\Framework\Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -214,11 +217,14 @@
     <ClInclude Include="PhysicsEvent.h">
       <Filter>소스 파일\Engine</Filter>
     </ClInclude>
+    <ClInclude Include="BoxCollider.h">
+      <Filter>소스 파일\Framework\Collider</Filter>
+    </ClInclude>
     <ClInclude Include="Rigidbody.h">
       <Filter>소스 파일\Framework\Collider</Filter>
     </ClInclude>
-    <ClInclude Include="BoxCollider.h">
-      <Filter>소스 파일\Framework\Collider</Filter>
+    <ClInclude Include="PlayerController.h">
+      <Filter>소스 파일\Framework\Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

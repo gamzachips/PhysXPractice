@@ -18,6 +18,8 @@ public:
 
 	void AddObject(Object* object) { mObjects.push_back(object); }
 	void AddPxActor(PxActor* actor) { mPxScene->addActor(*actor); }
+
+	PxScene* GetPxScene() { return mPxScene; }
 protected:
 
 	void MoveCamera();

@@ -55,13 +55,13 @@ void Scene::Update(float deltaTime)
 		object->Update(deltaTime);
 	}
 	
-	MoveCamera();
-	RotateCamera();
+	//MoveCamera();
+	//RotateCamera();
 	mCamera->Update(deltaTime);
 
 	if (mPxScene)
 	{
-		mPxScene->simulate(1.0f/120.f);
+		mPxScene->simulate(deltaTime);
 		mPxScene->fetchResults(true);
 	}
 }

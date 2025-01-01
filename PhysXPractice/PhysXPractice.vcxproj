@@ -158,6 +158,7 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="PhysicsEvent.h" />
     <ClInclude Include="PhysicsManager.h" />
+    <ClInclude Include="PlayerController.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Rigidbody.h" />
     <ClInclude Include="Scene.h" />
@@ -194,6 +195,7 @@
     </ClCompile>
     <ClCompile Include="PhysicsEvent.cpp" />
     <ClCompile Include="PhysicsManager.cpp" />
+    <ClCompile Include="PlayerController.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Rigidbody.cpp" />
     <ClCompile Include="Scene.cpp" />
