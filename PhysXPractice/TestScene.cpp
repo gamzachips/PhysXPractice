@@ -67,7 +67,7 @@ void TestScene::Init(ComPtr<ID3D11Device> device)
 		mParticle = new Object;
 		mParticle->CreateComponent<ParticleSystem>(this);
 		mParticle->CreateComponent<ParticleRenderer>(device);
-		mObj->GetTransform().SetPosition(Vector4(0, 40, 0, 0)); 
+		mObj->GetTransform().SetPosition(Vector4(100, 40, 0, 0)); 
 		AddObject(mParticle);
 	}
 	__super::Init(device);

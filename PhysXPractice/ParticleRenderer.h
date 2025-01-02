@@ -15,9 +15,16 @@ private:
 	ComPtr<ID3D11InputLayout> mInputLayout = nullptr;
 	ComPtr<ID3D11Device> mDevice = nullptr;
 	class ConstantBuffer* mWvpBuffer = nullptr;
+	class ConstantBuffer* mCameraBuffer = nullptr;
 	class ParticleSystem* particles;
+
+	ComPtr<ID3D11BlendState> blendState;
 
 	class VertexShader* vs;
 	class PixelShader* ps;
+	ComPtr<ID3D11GeometryShader> _gShader;
+	class Shader* gs;
+	ComPtr<ID3DBlob> _blob;
+	class Texture* tex;
 };
 

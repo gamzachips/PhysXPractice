@@ -27,15 +27,17 @@ Scene::Scene()
 	PxSceneDesc sceneDesc(Game::GetPhysicsManager()->GetPhysics()->getTolerancesScale());
 	sceneDesc.gravity = PxVec3(0.f, -9.8f, 0.f);
 	//sceneDesc.bounceThresholdVelocity = 0.5f;
-	sceneDesc.cpuDispatcher = PxDefaultCpuDispatcherCreate(1);
+	sceneDesc.cpuDispatcher = PxDefaultCpuDispatcherCreate(2);
 	sceneDesc.filterShader = CustomFilterShader;
 	sceneDesc.simulationEventCallback = mEventCallback;
 	// GPU 가속 설정 (필수)
 	sceneDesc.flags |= PxSceneFlag::eENABLE_GPU_DYNAMICS; // GPU dynamics 활성화
+	sceneDesc.flags |= PxSceneFlag::eENABLE_PCM;
 	sceneDesc.broadPhaseType = PxBroadPhaseType::eGPU;    // GPU BroadPhase 설정
+	sceneDesc.staticStructure = PxPruningStructureType::eDYNAMIC_AABB_TREE;
 	sceneDesc.cudaContextManager = Game::GetPhysicsManager()->GetCudaManager(); // GPU 가속을 위한 CUDA Context Manager 설정
+	sceneDesc.solverType = PxSolverType::eTGS;
 	mPxScene = Game::GetPhysicsManager()->GetPhysics()->createScene(sceneDesc);
-
 }
 
 Scene::~Scene()

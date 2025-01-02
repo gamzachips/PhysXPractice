@@ -9,10 +9,9 @@ ParticleSystem::ParticleSystem(Object* owner, Scene* scene) : Component(owner)
 		->createPBDParticleSystem(*Game::GetPhysicsManager()->GetCudaManager(), 96);
 
 	particleBuffer = Game::GetPhysicsManager()->GetPhysics()
-		->createParticleBuffer(1000, 1000, Game::GetPhysicsManager()->GetCudaManager());
+		->createParticleBuffer(1000, 10, Game::GetPhysicsManager()->GetCudaManager());
 
-
-	Vector3 pos = mOwner->GetTransform().GetWorldPosition();
+	bool is = scene->GetPxScene()->addActor(*particleSystem);
 
 	// PxPBDMaterial »ý¼º
 	PxPBDMaterial* defaultMat = Game::GetPhysicsManager()->GetPhysics()
@@ -50,16 +49,16 @@ ParticleSystem::ParticleSystem(Object* owner, Scene* scene) : Component(owner)
 	}
 
 	PxVec4* bufferPos = particleBuffer->getPositionInvMasses();
-	Game::GetPhysicsManager()->GetCudaContext()->memcpyHtoDAsync(reinterpret_cast<CUdeviceptr>(bufferPos), positionsHost, 1000 * sizeof(PxVec4), 0);
+	Game::GetPhysicsManager()->GetCudaManager()->getCudaContext()->memcpyHtoDAsync((CUdeviceptr)bufferPos, positionsHost, 1000 * sizeof(PxVec4), 0);
 	particleBuffer->raiseFlags(PxParticleBufferFlag::eUPDATE_POSITION);
 
 	
 	PxVec4* bufferVel = particleBuffer->getVelocities();
-	Game::GetPhysicsManager()->GetCudaContext()->memcpyHtoDAsync(reinterpret_cast<CUdeviceptr>(bufferVel), velocitiesHost, 1000 * sizeof(PxVec4), 0);
+	Game::GetPhysicsManager()->GetCudaManager()->getCudaContext()->memcpyHtoDAsync((CUdeviceptr)(bufferVel), velocitiesHost, 1000 * sizeof(PxVec4), 0);
 	particleBuffer->raiseFlags(PxParticleBufferFlag::eUPDATE_VELOCITY);
 
 	PxU32* bufferPhases = particleBuffer->getPhases();
-	Game::GetPhysicsManager()->GetCudaContext()->memcpyHtoDAsync(reinterpret_cast<CUdeviceptr>(bufferPhases), phasesHost, 1000 * sizeof(PxU32), 0);
+	Game::GetPhysicsManager()->GetCudaContext()->memcpyHtoDAsync((CUdeviceptr)(bufferPhases), phasesHost, 1000 * sizeof(PxU32), 0);
 	particleBuffer->raiseFlags(PxParticleBufferFlag::eUPDATE_PHASE);
 
 	particleBuffer->setNbActiveParticles(1000);
@@ -78,7 +77,6 @@ ParticleSystem::ParticleSystem(Object* owner, Scene* scene) : Component(owner)
 	particleSystem->setSolidRestOffset(solidRestOffset);
 	particleSystem->setFluidRestOffset(fluidRestOffset);
 
-	bool is = scene->GetPxScene()->addActor(*particleSystem);
 
 	mVertexBuffer = new VertexBuffer;
 	mVertexBuffer->Create(positionsHost, 1000, Game::GetRenderer().GetDevice());
@@ -87,6 +85,7 @@ ParticleSystem::ParticleSystem(Object* owner, Scene* scene) : Component(owner)
 
 void ParticleSystem::Init()
 {
+
 }
 
 void ParticleSystem::Update(float deltaTime)
@@ -95,16 +94,20 @@ void ParticleSystem::Update(float deltaTime)
 
 void ParticleSystem::LateUpdate(float deltaTime)
 {
+
+	Game::GetPhysicsManager()->GetCudaManager()->acquireContext();
+
 	PxVec4* bufferPos = particleBuffer->getPositionInvMasses();
 
-	Game::GetPhysicsManager()->GetCudaContext()->memcpyDtoHAsync(
-		positionsHost, reinterpret_cast<CUdeviceptr>(bufferPos), sizeof(PxVec4) * 1000, 0);
+	Game::GetPhysicsManager()->GetCudaManager()->getCudaContext()->memcpyDtoHAsync(
+		positionsHost, (CUdeviceptr)bufferPos, sizeof(PxVec4) * 1000, 0);
 
 	D3D11_MAPPED_SUBRESOURCE mappedResource;
 	HRESULT hr = Game::GetRenderer().GetDeviceContext()->Map(
 		mVertexBuffer->GetComPtr().Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource
 	);
 
+	Game::GetPhysicsManager()->GetCudaManager()->releaseContext();
 
 	if (SUCCEEDED(hr)) {
 		memcpy(mappedResource.pData, positionsHost, sizeof(PxVec4) * 1000);

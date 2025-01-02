@@ -128,6 +128,7 @@ void MeshRenderer::InputAssemblerStage(std::shared_ptr<Mesh> mesh)
 void MeshRenderer::VertexShaderStage()
 {
 	_deviceContext->VSSetShader(_model->GetVS()->Get().Get(), nullptr, 0);
+	_deviceContext->GSSetShader(nullptr, nullptr, 0);
 	_deviceContext->VSSetConstantBuffers(0, 1, _wvpBuffer->GetComPtr().GetAddressOf());
 }
 

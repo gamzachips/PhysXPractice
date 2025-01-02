@@ -36,3 +36,9 @@ struct LightData
 	int padding3;
 	Vector4 cameraPosition;
 };
+
+struct CameraBuffer
+{
+	Vector3 cameraPosition;  // 카메라 위치
+	float padding;          // 패딩
+};

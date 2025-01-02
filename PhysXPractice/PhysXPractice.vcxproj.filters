@@ -257,5 +257,8 @@
     <FxCompile Include="SimplePS.hlsl">
       <Filter>소스 파일\__test</Filter>
     </FxCompile>
+    <FxCompile Include="SimpleGS.hlsl">
+      <Filter>소스 파일\__test</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>
