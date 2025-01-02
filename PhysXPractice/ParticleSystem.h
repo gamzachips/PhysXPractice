@@ -15,9 +15,9 @@ public:
 private:
 	PxPBDParticleSystem* particleSystem;
 	PxParticleBuffer* particleBuffer;
-	PxVec4 positionsHost[1000];
-	PxVec4 velocitiesHost[1000];
-	PxU32 phasesHost[1000];
+	PxVec4 positionsHost[9000];
+	PxVec4 velocitiesHost[9000];
+	PxU32 phasesHost[9000];
 
 	class VertexBuffer* mVertexBuffer{};
 };

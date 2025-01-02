@@ -52,7 +52,7 @@ void ParticleRenderer::Init()
 	mCameraBuffer = new ConstantBuffer;
 	mCameraBuffer->Create(sizeof(CameraBuffer), mDevice);
 
-	tex = new Texture(mDevice, L"smoke_01.png");
+	tex = new Texture(mDevice, L"circle_05.png");
 
 
 	D3D11_BLEND_DESC blendDesc = {};
