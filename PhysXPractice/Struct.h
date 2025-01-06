@@ -42,3 +42,9 @@ struct CameraBuffer
 	Vector3 cameraPosition;  // 카메라 위치
 	float padding;          // 패딩
 };
+
+struct SizeBuffer
+{
+	float size;
+	float padding[3];
+};

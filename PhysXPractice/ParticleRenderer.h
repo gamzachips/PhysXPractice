@@ -16,6 +16,7 @@ private:
 	ComPtr<ID3D11Device> mDevice = nullptr;
 	class ConstantBuffer* mWvpBuffer = nullptr;
 	class ConstantBuffer* mCameraBuffer = nullptr;
+	class ConstantBuffer* mSizeBuffer = nullptr;
 	class ParticleSystem* particles;
 
 	ComPtr<ID3D11BlendState> blendState;
@@ -26,5 +27,6 @@ private:
 	class Shader* gs;
 	ComPtr<ID3DBlob> _blob;
 	class Texture* tex;
+	float size = 2.0f;
 };
 

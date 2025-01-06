@@ -6,7 +6,7 @@ BoxCollider::BoxCollider(Object* owner, Vector3 size) : Collider(owner)
 	mShape = Game::GetPhysicsManager()->GetPhysics()
 		->createShape(PxBoxGeometry(PxVec3(size.x, size.y, size.z)), *Game::GetPhysicsManager()->GetDefaultMaterial());
 	mShape->userData = this;
-
+	mShape->setFlag(PxShapeFlag::eSCENE_QUERY_SHAPE, true);
 }
 
 void BoxCollider::Init()

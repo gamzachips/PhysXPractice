@@ -11,22 +11,22 @@ ParticleSystem::ParticleSystem(Object* owner, Scene* scene) : Component(owner)
 	particleBuffer = Game::GetPhysicsManager()->GetPhysics()
 		->createParticleBuffer(9000, 10, Game::GetPhysicsManager()->GetCudaManager());
 
-	bool is = scene->GetPxScene()->addActor(*particleSystem);
+	scene->GetPxScene()->addActor(*particleSystem);
 
 	// PxPBDMaterial 생성
 	PxPBDMaterial* defaultMat = Game::GetPhysicsManager()->GetPhysics()
 		->createPBDMaterial(
-			0.2f,  
-			0.05f, 
-			0.0f,  
-			0.01f, 
-			0.0f,  
-			0.0f,  
-			0.0f,  
-			0.3f,  
-			0.01f, 
-			1.0f,  
-			0.0f   
+			0.1f,  // 마찰 계수
+			0.05f, // 감쇠 계수
+			0.0f,  // 접착력
+			0.01f, // 점성
+			0.9f,  // 소용돌이 강도
+			0.1f,  // 표면 장력
+			0.7f,  // 결합력
+			0.5f,  // 상승력
+			0.1f, // 공기 저항
+			1.0f,  // CFL 계수
+			0.0f   // 중력
 		);
 
 	// 파티클 페이즈 생성
@@ -36,25 +36,30 @@ ParticleSystem::ParticleSystem(Object* owner, Scene* scene) : Component(owner)
 	);
 
 	srand(static_cast<unsigned int>(time(0)));
-	int particleCount = 9000; // 눈 입자 수
-	float spawnAreaSize = 400.0f; // 눈이 내리는 영역 크기
-	float fallSpeed = 30.0f; // 눈의 하강 속도
+	int particleCount = 9000; // 연기 입자 수
+	PxVec3 spawnCenter(0.0f, 10.0f, 0.0f); // 연기가 모이는 중심 위치
+	float spawnRadius = 5.0f; // 초기 위치에서의 반경
+	float riseSpeed = 7.0f; // 연기의 상승 속도
+	float horizontalSpread = 2.0f; // 연기의 확산 정도
+	float timeOffsetRange = 150.0f; // 시간 오프셋 범위
 
 	for (int i = 0; i < particleCount; ++i)
 	{
-		// X, Y, Z 위치를 랜덤하게 설정
+		float timeOffset = (rand() % 100 / 100.0f) * timeOffsetRange;
+
+		// 초기 위치 설정 (spawnCenter 근처에 모임)
 		positionsHost[i] = PxVec4(
-			(rand() % 100 / 100.0f - 0.5f) * spawnAreaSize, // X축 랜덤 위치
-			(rand() % 100 / 100.0f) * spawnAreaSize,        // Y축 높이 (화면 위쪽)
-			(rand() % 100 / 100.0f - 0.5f) * spawnAreaSize, // Z축 랜덤 위치
+			spawnCenter.x + ((rand() % 100 / 100.0f - 0.5f) * spawnRadius), // X축 중심 근처
+			spawnCenter.y + ((rand() % 100 / 100.0f - 0.5f) * spawnRadius), // Y축 중심 근처
+			spawnCenter.z + ((rand() % 100 / 100.0f - 0.5f) * spawnRadius), // Z축 중심 근처
 			1.0f
 		);
 
-		// 초기 속도: Y축 하강, X/Z는 약간의 흔들림
+		// 초기 속도 설정 (Y축 상승, X/Z는 약간의 확산)
 		velocitiesHost[i] = PxVec4(
-			(rand() % 10 / 100.0f - 0.05f) * 0.1f, // X축 약간의 흔들림
-			-(fallSpeed + (rand() % 10 / 100.0f) * fallSpeed), // Y축 하강
-			(rand() % 10 / 100.0f - 0.05f) * 0.1f, // Z축 약간의 흔들림
+			(rand() % 100 / 100.0f - 0.5f) * horizontalSpread, // X축 확산
+			riseSpeed + timeOffset * 0.1f,                    // Y축 상승 속도 (시간 오프셋 반영)
+			(rand() % 100 / 100.0f - 0.5f) * horizontalSpread, // Z축 확산
 			0.0f
 		);
 	}
@@ -74,9 +79,10 @@ ParticleSystem::ParticleSystem(Object* owner, Scene* scene) : Component(owner)
 
 	particleBuffer->setNbActiveParticles(9000);
 	particleSystem->addParticleBuffer(particleBuffer);
-
-	const PxReal particleSpacing = 0.3f;  // 입자 간 거리
-	const PxReal fluidDensity = 100.f;   // 유체 밀도
+	
+	// 입자 간 거리와 속성 설정
+	const PxReal particleSpacing = 0.01f;  // 입자 간 거리
+	const PxReal fluidDensity = 100.f;    // 연기의 밀도
 	const PxReal restOffset = 0.5f * particleSpacing / 0.6f;
 	const PxReal solidRestOffset = restOffset;
 	const PxReal fluidRestOffset = restOffset * 0.6f;
@@ -111,18 +117,18 @@ void ParticleSystem::LateUpdate(float deltaTime)
 	Game::GetPhysicsManager()->GetCudaManager()->getCudaContext()->memcpyDtoHAsync(
 		positionsHost, (CUdeviceptr)bufferPos, sizeof(PxVec4) * 9000, 0);
 
-	for (int i = 0; i < 9000; ++i)
-	{
-		// 화면 아래로 떨어지면 다시 위쪽으로 재배치
-		if (positionsHost[i].y < 40.0f) // 화면 아래 경계
-		{
-			positionsHost[i].y = 1000.0f; // 다시 위쪽으로
-			positionsHost[i].x = (rand() % 100 / 100.0f - 0.5f) * 1000.0f; // X축 랜덤 위치
-			positionsHost[i].z = (rand() % 100 / 100.0f - 0.5f) * 1000.0f; // Z축 랜덤 위치
-		}
-	}
-	Game::GetPhysicsManager()->GetCudaManager()->getCudaContext()->memcpyHtoDAsync((CUdeviceptr)bufferPos, positionsHost, 9000 * sizeof(PxVec4), 0);
-	particleBuffer->raiseFlags(PxParticleBufferFlag::eUPDATE_POSITION);
+	//for (int i = 0; i < 1000; ++i)
+	//{
+	//	// 화면 아래로 떨어지면 다시 위쪽으로 재배치
+	//	if (positionsHost[i].y < 25.0f) // 화면 아래 경계
+	//	{
+	//		positionsHost[i].y = 200; // 다시 위쪽으로
+	//		positionsHost[i].x = (rand() % 100 / 100.0f - 0.5f) * 500.0f; // X축 랜덤 위치
+	//		positionsHost[i].z = (rand() % 100 / 100.0f - 0.5f) * 500.0f; // Z축 랜덤 위치
+	//	}
+	//}
+	//Game::GetPhysicsManager()->GetCudaManager()->getCudaContext()->memcpyHtoDAsync((CUdeviceptr)bufferPos, positionsHost, 9000 * sizeof(PxVec4), 0);
+	//particleBuffer->raiseFlags(PxParticleBufferFlag::eUPDATE_POSITION);
 
 
 	D3D11_MAPPED_SUBRESOURCE mappedResource;

@@ -16,7 +16,7 @@ private:
 	PxControllerFilters mCharacterControllerFilters;
 
 	float mSpeed = 0.5f;
-	float mJumpSpeed = 6.f;
+	float mJumpSpeed = 30.f;
 	float mGravity = 9.8f;
 	PxVec3 mMoveDirection = PxVec3(0.f, 0.f, 0.f);
 };

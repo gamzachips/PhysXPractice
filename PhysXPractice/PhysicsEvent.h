@@ -54,8 +54,8 @@ class PhysicsEvent : public PxSimulationEventCallback
 
 			Object* triggerObject = static_cast<Object*>(triggerActor->userData);
 			Object* otherObject = static_cast<Object*>(otherActor->userData);
-			triggerObject->OnTriggerEnter(otherObject);
-			otherObject->OnTriggerEnter(triggerObject);
+			//triggerObject->OnTriggerEnter(otherObject);
+			//otherObject->OnTriggerEnter(triggerObject);
 		}
 	}
 

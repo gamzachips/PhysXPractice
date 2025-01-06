@@ -52,7 +52,10 @@ void ParticleRenderer::Init()
 	mCameraBuffer = new ConstantBuffer;
 	mCameraBuffer->Create(sizeof(CameraBuffer), mDevice);
 
-	tex = new Texture(mDevice, L"circle_05.png");
+	mSizeBuffer = new ConstantBuffer;
+	mSizeBuffer->Create(sizeof(SizeBuffer), mDevice);
+
+	tex = new Texture(mDevice, L"smoke_01.png");
 
 
 	D3D11_BLEND_DESC blendDesc = {};
@@ -70,6 +73,7 @@ void ParticleRenderer::Init()
 
 void ParticleRenderer::Update(float deltaTime)
 {
+	size += 1.5f * deltaTime;
 }
 
 void ParticleRenderer::LateUpdate(float deltaTime)
@@ -88,8 +92,11 @@ void ParticleRenderer::Render(ComPtr<ID3D11DeviceContext> dc)
 
 	wvpData.view = XMMatrixTranspose(view);
 	wvpData.projection = XMMatrixTranspose(projection);
-
 	dc->UpdateSubresource(mWvpBuffer->GetComPtr().Get(), 0, nullptr, &wvpData, 0, 0);
+
+	SizeBuffer sizeB;
+	sizeB.size = size;
+	dc->UpdateSubresource(mSizeBuffer->GetComPtr().Get(), 0, nullptr, &sizeB, 0, 0);
 
 	
 	VertexBuffer* vb = particles->GetVertexBuffer();
@@ -101,6 +108,7 @@ void ParticleRenderer::Render(ComPtr<ID3D11DeviceContext> dc)
 	dc->VSSetShader(vs->Get().Get(), nullptr, 0);
 	dc->VSSetConstantBuffers(0, 1, mWvpBuffer->GetComPtr().GetAddressOf());
 	dc->GSSetShader(_gShader.Get(), nullptr, 0);
+	dc->GSSetConstantBuffers(1, 1, mSizeBuffer->GetComPtr().GetAddressOf());
 	dc->PSSetShader(ps->Get().Get(), nullptr, 0);
 	dc->PSSetShaderResources(0, 1, tex->GetTextRV().GetAddressOf());
 	dc->PSSetSamplers(0, 1, Texture::GetLinearSampler().GetAddressOf());

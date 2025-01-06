@@ -4,12 +4,18 @@ struct PS_INPUT
     float2 texCoord : TEXCOORD0;
 };
 
+cbuffer SizeBuffer : register(b1) 
+{
+    float size;
+    float padding[3];
+};
+
 [maxvertexcount(4)]
 void main(point PS_INPUT input[1], inout TriangleStream<PS_INPUT> stream)
 {
     // 1. 입력 데이터 가져오기
     float4 centerPos = input[0].position; // 클립 공간 좌표
-    float size = 2; // 스프라이트 크기 (클립 공간 단위)
+    //float size = 6; // 스프라이트 크기 (클립 공간 단위)
 
     // 2. 사각형의 네 꼭짓점 위치 계산 (클립 공간 오프셋)
     float2 offsets[4] = {

@@ -4,6 +4,12 @@ class Object;
 class Camera;
 class DirectionalLight;
 
+struct Ray
+{
+	Vector3 origin;
+	Vector3 dir;
+};
+
 class Scene
 {
 public:
@@ -24,6 +30,9 @@ protected:
 
 	void MoveCamera();
 	void RotateCamera();
+
+	Vector2 GetNDC(float mouseX, float mouseY);
+	Ray GeneratePickingRay(Vector2 ndcCoords);
 
 	Camera* mCamera;
 	std::vector<Object*> mObjects;

@@ -19,7 +19,7 @@ public:
 	}
 
 	Transform* parent = nullptr;
-	PxTransform _pxTransform; 
+	PxTransform _pxTransform{};
 	Vector4 _size = { 1.f, 1.f, 1.f, 1.f };
 	Vector4 _rotation{};
 	Vector4 _translation{};

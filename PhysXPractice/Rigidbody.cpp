@@ -7,13 +7,17 @@ Rigidbody::Rigidbody(Object* owner, Scene* scene, bool isDynamic) : Component(ow
 {
 	mIsDynamic = isDynamic;
 
+	mOwner->GetTransform().UpdateTransform();
+
+	mOwner->GetTransform()._pxTransform;
+
 	if (isDynamic == false)
 	{
-		mRigidbody = Game::GetPhysicsManager()->GetPhysics()->createRigidStatic(PxTransform(PxVec3(0.f, 0.f, 0.f)));
+		mRigidbody = Game::GetPhysicsManager()->GetPhysics()->createRigidStatic(mOwner->GetTransform()._pxTransform);
 	}
 	else
 	{
-		mRigidbody = Game::GetPhysicsManager()->GetPhysics()->createRigidDynamic(PxTransform(PxVec3(0.f, 0.f, 0.f)));
+		mRigidbody = Game::GetPhysicsManager()->GetPhysics()->createRigidDynamic(mOwner->GetTransform()._pxTransform);
 	}
 	mRigidbody->userData = owner;
 
